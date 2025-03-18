@@ -11,16 +11,16 @@ if not os.path.exists(DOWNLOAD_FOLDER):
 
 # 유튜브 오디오 다운로드 함수
 def download_audio(youtube_url, output_path=DOWNLOAD_FOLDER):
-  ydl_opts = {
-    'format': 'bestaudio/best',
-    'outtmpl': f"{output_path}/%(title)s.%(ext)s",
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'wav',
-        'preferredquality': '192',
-    }],
-    'cookies-from-browser': 'chrome',  # 브라우저 쿠키 직접 사용
-}
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'outtmpl': f"{output_path}/%(title)s.%(ext)s",
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'wav',
+            'preferredquality': '192',
+        }],
+        'cookies-from-browser': 'chrome',  # 브라우저 쿠키 직접 사용
+    }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(youtube_url, download=True)
@@ -33,7 +33,7 @@ def download_audio(youtube_url, output_path=DOWNLOAD_FOLDER):
 def index():
     if request.method == "POST":
         youtube_url = request.form["youtube_url"]
-        
+
         try:
             # 1. 유튜브에서 오디오 다운로드
             wav_file = download_audio(youtube_url)
@@ -46,7 +46,7 @@ def index():
 
     return '''
     <form method="post">
-        유튜브 링크: <input type="text" name="youtube_url">
+        유튜브 링크 : <input type="text" name="youtube_url">
         <input type="submit" value="변환하기">
     </form>
     '''
