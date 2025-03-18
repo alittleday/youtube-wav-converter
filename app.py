@@ -19,6 +19,8 @@ def download_audio(youtube_url, output_path=DOWNLOAD_FOLDER):
             'preferredcodec': 'wav',
             'preferredquality': '192'
         }]
+        'cookiefile': 'cookies.txt',  # 쿠키 파일 사용
+
     }  # ✅ 중괄호 위치 수정 완료
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -51,5 +53,5 @@ def index():
     '''
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000, debug=True)
 
