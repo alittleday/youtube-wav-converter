@@ -14,10 +14,22 @@ load_dotenv()  # .env 파일에서 환경 변수 로드
 
 oauth = OAuth(app)
 
+import os
+from flask import Flask, redirect, url_for, session, request, render_template, send_file
+from authlib.integrations.flask_client import OAuth
+
+app = Flask(__name__)
+app.secret_key = "your_secret_key"
+
+# ✅ 환경 변수에서 Google OAuth 정보 불러오기
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+
+oauth = OAuth(app)
 google = oauth.register(
     name="google",
-    client_id=os.getenv("GOOGLE_CLIENT_ID"),
-    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    client_id=GOOGLE_CLIENT_ID,  # ✅ 환경 변수에서 가져옴
+    client_secret=GOOGLE_CLIENT_SECRET,  # ✅ 환경 변수에서 가져옴
     access_token_url="https://oauth2.googleapis.com/token",
     authorize_url="https://accounts.google.com/o/oauth2/auth",
     authorize_params=None,
