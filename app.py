@@ -11,17 +11,16 @@ if not os.path.exists(DOWNLOAD_FOLDER):
 
 # 유튜브 오디오 다운로드 함수
 def download_audio(youtube_url, output_path=DOWNLOAD_FOLDER):
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'outtmpl': f"{output_path}/%(title)s.%(ext)s",
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'wav',
-            'preferredquality': '192'
-        }]
-        'cookiefile': 'cookies.txt',  # 쿠키 파일 사용
-
-    }  # ✅ 중괄호 위치 수정 완료
+  ydl_opts = {
+    'format': 'bestaudio/best',
+    'outtmpl': f"{output_path}/%(title)s.%(ext)s",
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'wav',
+        'preferredquality': '192',
+    }],
+    'cookies-from-browser': 'chrome',  # 브라우저 쿠키 직접 사용
+}
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(youtube_url, download=True)
