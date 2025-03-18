@@ -11,3 +11,4 @@ youtube-dl==2021.12.17
 yt-dlp==2025.2.19
 gunicorn
 
+authlib
