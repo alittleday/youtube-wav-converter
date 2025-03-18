@@ -19,7 +19,10 @@ def download_audio(youtube_url, output_path=DOWNLOAD_FOLDER):
             'preferredcodec': 'wav',
             'preferredquality': '192',
         }],
-        'cookies-from-browser': 'chrome',  # 브라우저 쿠키 직접 사용
+        'cookiefile': 'cookies.txt',  # 최신 쿠키 적용
+        'nocheckcertificate': True,
+        'quiet': False,
+        'noplaylist': True,  # 단일 영상만 다운로드
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
